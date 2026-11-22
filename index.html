@@ -258,7 +258,7 @@ html[data-stage="4"] .brand { font-family: var(--serif); font-weight: 400; }
 
 /* ---------- eye ---------- */
 .eye-sec { background: #000; color: #D8D2C8; position: relative; }
-.eye-stick { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 68px); height: 62vh; display: grid; place-items: center; z-index: 0; }
+.eye-stick { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 68px); height: 62vh; height: 62svh; display: grid; place-items: center; z-index: 0; }
 .eye-stick canvas { width: min(100%, 960px); height: 100%; display: block; }
 .lines { position: relative; z-index: 1; margin-top: -40vh; padding-bottom: 30vh; }
 .line {
@@ -313,6 +313,102 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
 .jitter { animation: jitter .18s steps(2) infinite; }
 @keyframes jitter { 0% { transform: translate(0, 0); } 50% { transform: translate(1px, -1px); } 100% { transform: translate(-1px, 1px); } }
 
+/* ---------- marketing widgets that rot ---------- */
+.hl { transition: color 1s; }
+html[data-stage="3"] .hl, html[data-stage="4"] .hl { color: var(--blood); font-weight: 800; text-transform: uppercase; }
+
+#cookie {
+  position: fixed; z-index: 80; left: 50%; transform: translateX(-50%); bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  width: min(560px, calc(100vw - 32px)); background: #fff; color: var(--ink); border-radius: 18px; padding: 18px 20px;
+  box-shadow: 0 20px 50px -15px rgba(0,0,0,.35); display: grid; gap: 14px; font-size: 14px; animation: rise .4s ease-out;
+}
+#cookie .row { display: flex; gap: 10px; flex-wrap: wrap; }
+#cookie .btn { padding: 10px 18px; font-size: 14px; }
+#cookie.dark { background: #0B0B0B; color: #CFC8BE; box-shadow: 0 0 0 1px #3A0D10, 0 20px 60px -10px rgba(120,10,15,.5); font-family: var(--serif); font-size: 18px; }
+#cookie.dark .btn { background: #2A0A0C; color: #E6C9CB; box-shadow: inset 0 0 0 1px #5A1418; font-family: var(--sans); }
+
+#toasts {
+  position: fixed; z-index: 75; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  display: grid; gap: 8px; pointer-events: none; width: min(340px, calc(100vw - 104px));
+}
+.toast { background: #fff; color: var(--ink); border-radius: 14px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; font-size: 13px; line-height: 1.4; font-weight: 600; box-shadow: 0 14px 34px -12px rgba(0,0,0,.35); animation: rise .4s ease-out; transition: opacity .4s, transform .4s; }
+.toast small { display: block; color: var(--muted); font-size: 12px; font-weight: 500; margin-top: 2px; }
+.toast .tav { width: 36px; height: 36px; border-radius: 50%; flex: none; background: #DFF1EC; display: grid; place-items: center; }
+.toast .tav svg { width: 20px; height: 20px; }
+.toast.dark { background: #0E0E0E; color: #DDD6CC; box-shadow: 0 0 0 1px #2A0B0D, 0 14px 34px -12px #000; }
+.toast.dark small { color: #B3343B; }
+.toast.dark .tav { background: #000; }
+.toast.out { opacity: 0; transform: translateY(8px); }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } }
+#cookie { animation-name: riseC; }
+@keyframes riseC { from { opacity: 0; transform: translate(-50%, 12px); } }
+
+#chatBtn {
+  position: fixed; z-index: 76; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: 56px; height: 56px; border-radius: 50%; border: 0; background: var(--brand); color: #fff; display: grid; place-items: center;
+  box-shadow: 0 12px 30px -10px rgba(0,0,0,.45); transition: background .8s;
+}
+#chatBtn svg { width: 26px; height: 26px; }
+#chatBadge { position: absolute; top: -2px; right: -2px; min-width: 20px; height: 20px; border-radius: 10px; background: #E0262F; color: #fff; font-size: 11px; font-weight: 800; display: grid; place-items: center; padding: 0 5px; }
+html[data-stage="3"] #chatBtn, html[data-stage="4"] #chatBtn { background: #1A0B0C; color: #C71F28; box-shadow: 0 0 0 1px #4A1216, 0 12px 30px -10px #000; }
+#chatTease {
+  position: fixed; z-index: 76; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  max-width: min(280px, calc(100vw - 32px)); background: #fff; color: var(--ink); border-radius: 16px 16px 4px 16px; padding: 12px 14px;
+  font-size: 14px; box-shadow: 0 14px 34px -12px rgba(0,0,0,.35); animation: rise .4s ease-out; border: 0; text-align: left;
+}
+#chatTease.dark { background: #0E0E0E; color: #E04A50; font-family: var(--serif); font-size: 17px; box-shadow: 0 0 0 1px #2A0B0D; }
+#chat {
+  position: fixed; z-index: 78; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  width: min(360px, calc(100vw - 32px)); height: min(480px, calc(100vh - 170px)); background: #fff; color: var(--ink); border-radius: 20px;
+  box-shadow: 0 30px 70px -20px rgba(0,0,0,.5); display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; animation: rise .3s ease-out;
+}
+.chat-head { background: var(--brand-deep); color: #fff; padding: 14px 16px; display: flex; gap: 12px; align-items: center; }
+.chat-head b { display: block; font-size: 15px; }
+.chat-head span span { font-size: 12px; opacity: .8; }
+.chat-head button { margin-left: auto; background: none; border: 0; color: inherit; font-size: 24px; line-height: 1; padding: 4px 8px; }
+.chat-av { width: 36px; height: 36px; border-radius: 50%; background: #DFF1EC; flex: none; display: grid; place-items: center; }
+.chat-av svg { width: 22px; height: 22px; }
+.chat-log { overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 8px; background: #F4F7F5; min-height: 0; }
+.msg { max-width: 82%; padding: 9px 13px; border-radius: 16px; font-size: 14px; line-height: 1.45; overflow-wrap: anywhere; }
+.msg.them { background: #fff; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+.msg.me { background: var(--brand); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.msg.typing { color: var(--muted); letter-spacing: 3px; }
+.chat-form { display: flex; gap: 8px; padding: 10px; border-top: 1px solid #E2E9E6; background: #fff; }
+.chat-form input { flex: 1; min-width: 0; border: 1px solid #D5DEDA; border-radius: 999px; padding: 10px 14px; font: inherit; font-size: 16px; }
+.chat-form button { border: 0; border-radius: 999px; background: var(--brand); color: #fff; padding: 0 16px; font-weight: 700; }
+#chat.dark { background: #0D0D0D; color: #D8D1C6; }
+#chat.dark .chat-head { background: #1A0B0C; color: #E04A50; }
+#chat.dark .chat-av { background: #000; }
+#chat.dark .chat-log { background: #070707; }
+#chat.dark .msg.them { background: #161616; color: #E04A50; box-shadow: none; font-family: var(--serif); font-size: 17px; }
+#chat.dark .msg.me { background: #262626; color: #CFC8BE; }
+#chat.dark .chat-form { background: #0D0D0D; border-color: #222; }
+#chat.dark .chat-form input { background: #141414; color: #CFC8BE; border-color: #2A2A2A; }
+#chat.dark .chat-form button { background: #3A0D10; }
+
+#exitM { position: fixed; inset: 0; z-index: 90; background: rgba(10,20,18,.55); display: grid; place-items: center; padding: 16px; animation: rise .3s ease-out; }
+.exit-card { background: #fff; color: var(--ink); border-radius: 24px; padding: 36px 32px 32px; width: min(460px, 100%); display: grid; gap: 14px; text-align: center; position: relative; }
+.exit-card h3 { font-size: 26px; letter-spacing: -0.02em; }
+.exit-card p { color: var(--muted); }
+.exit-card form { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.exit-card input { flex: 1 1 180px; min-width: 0; border: 1px solid #D5DEDA; border-radius: 999px; padding: 12px 16px; font: inherit; font-size: 16px; }
+.exit-card .x { position: absolute; top: 8px; right: 12px; background: none; border: 0; font-size: 26px; color: var(--muted); padding: 4px 8px; }
+#exitStay { justify-self: center; }
+#exitM.dark { background: rgba(0,0,0,.9); }
+#exitM.dark .exit-card { background: #000; color: #C71F28; box-shadow: 0 0 0 1px #3A0D10; }
+#exitM.dark h3 { font-family: var(--serif); font-weight: 400; font-size: 44px; letter-spacing: 0; }
+#exitM.dark p { color: #7A6E6A; }
+#exitM.dark .x { display: none; }
+#exitM.dark #exitStay { background: #2A0A0C; color: #E6C9CB; box-shadow: inset 0 0 0 1px #5A1418; }
+
+#hands { position: fixed; inset: 0; z-index: 43; pointer-events: none; overflow: hidden; }
+.hand { position: absolute; width: 150px; height: 190px; margin: -95px 0 0 -75px; opacity: 0; transition: opacity .2s; }
+.hand svg { width: 100%; height: 100%; display: block; }
+.hand.on { opacity: .5; }
+.hand.fade { opacity: 0; transition: opacity 3.5s; }
+#ghost { position: fixed; left: 0; top: 0; z-index: 95; width: 20px; height: 20px; pointer-events: none; opacity: 0; transition: opacity 1.2s; }
+#ghost.on { opacity: .6; }
+
 @media (max-width: 960px) {
   .hero .wrap, .split { grid-template-columns: 1fr; }
   .grid3, .plans, .facts, .steps { grid-template-columns: 1fr 1fr; }
@@ -323,12 +419,28 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
 }
 @media (max-width: 620px) {
   .band { padding-block: 72px; }
-  .grid3, .plans, .facts, .steps { grid-template-columns: 1fr; }
+  .grid3, .plans, .steps { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .fact { padding: 14px; }
+  .fact span { font-size: 11px; letter-spacing: .06em; }
+  .fact b { font-size: 17px; }
   .chip { font-size: 12px; padding: 8px 10px; }
   .chip.c3 { display: none; }
   .note { padding: 40px 22px 30px 50px; font-size: 25px; }
   .note::before { left: 34px; }
   .announce { font-size: 13px; }
+  .snd-long { display: none; }
+  .cam canvas { aspect-ratio: 1 / 1; }
+  .room { padding-block: 24px 80px; }
+  .room .cam { margin-top: 28px; }
+  .eye-stick { height: 50vh; height: 50svh; }
+  .line { font-size: 1.9rem; }
+  .final { padding-block: 100px 120px; }
+  #chat { left: 0; right: 0; bottom: 0; width: 100%; height: 78vh; height: 78svh; border-radius: 20px 20px 0 0; padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .exit-card { padding: 34px 20px 24px; }
+  #exitM.dark h3 { font-size: 36px; }
+  .hand { width: 110px; height: 140px; margin: -70px 0 0 -55px; }
+  .tk q { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .flicker, .jitter, .q.locked { animation: none; }
@@ -425,12 +537,12 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
       <p class="lede">One small hub connects your lights, heating, locks and cameras, then quietly learns how your family lives.</p>
     </div>
     <div class="grid3">
-      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0Z"/></svg></div><h3>Adaptive climate</h3><p>Haven learns the temperature each person likes and adjusts room by room, before anyone walks in.</p></article>
-      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z"/></svg></div><h3>Lighting that follows you</h3><p>Lights warm up as you enter a room and dim as you leave. Haven always knows which room you're in.</p></article>
-      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></div><h3>Presence awareness</h3><p>See who's home at a glance. Haven recognises every person in the household by the sound of their footsteps.</p></article>
-      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><h3>Natural voice</h3><p>Talk to Haven like a person. It remembers everything you have ever said to it, and in which room.</p></article>
-      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6Z"/></svg></div><h3>Total security</h3><p>Every door, window and camera in one app. Nothing gets in without Haven knowing about it.</p></article>
-      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg></div><h3>Restful nights</h3><p>Haven listens to every breath through the night, so you never have to get up and check.</p></article>
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0Z"/></svg></div><h3>Adaptive climate</h3><p><span class="hl">H</span>aven learns the temperature each person likes and adjusts room by room, before anyone walks in.</p></article>
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z"/></svg></div><h3>Lighting that follows you</h3><p>Lights warm up as you <span class="hl">e</span>nter a room and dim as you leave. Haven always knows which room you're in.</p></article>
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></div><h3>Presence awareness</h3><p>See who's home at a glance. Haven recognises every person in the househo<span class="hl">l</span>d by the sound of their footsteps.</p></article>
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><h3>Natural voice</h3><p>Talk to Haven like a <span class="hl">p</span>erson. It remembers everything you have ever said to it, and in which room.</p></article>
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6Z"/></svg></div><h3>Total security</h3><p>Every door, window and camera in one app. Nothing gets in witho<span class="hl">u</span>t Haven knowing about it.</p></article>
+      <article class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg></div><h3>Restful nights</h3><p>Haven listens to every breath through the night, <span class="hl">s</span>o you never have to get up and check.</p></article>
     </div>
     <p class="fine">* Haven hubs have no off switch, for your convenience.</p>
   </div>
@@ -462,7 +574,7 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
     <div class="stat"><b>2.4M</b><span>homes running Haven</span></div>
     <div class="stat"><b>98.9%</b><span>of families never cancel</span></div>
     <div class="stat"><b>24/7</b><span>listening, in every room</span></div>
-    <div class="stat"><b data-corrupt="1">0</b><span>families have ever moved out</span></div>
+    <div class="stat"><b data-corrupt="1">0</b><span id="statMoved">families have ever moved out</span></div>
   </div>
 </section>
 
@@ -682,9 +794,33 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
   </div>
 </footer>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="smudge" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="10"/><feGaussianBlur stdDeviation="1.4"/></filter></svg>
+<div id="hands" aria-hidden="true"></div>
+<svg id="ghost" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 1v16l4.5-4.2 3 6.2 2.6-1.2-3-6.1H15Z" fill="#000" stroke="#ddd" stroke-width="1"/></svg>
+<div id="toasts" aria-live="polite"></div>
+<div id="cookie" role="dialog" aria-label="Cookie notice" hidden>
+  <p id="cookieText">We use cookies to personalise your Haven experience and remember your preferences.</p>
+  <div class="row"><button class="btn btn-primary" id="ckAccept" type="button">Accept all</button><button class="btn btn-ghost" id="ckDecline" type="button">Decline</button></div>
+</div>
+<button id="chatTease" type="button" hidden></button>
+<button id="chatBtn" type="button" aria-label="Chat with Haven support"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/></svg><span id="chatBadge" hidden>1</span></button>
+<section id="chat" aria-label="Haven support chat" hidden>
+  <div class="chat-head"><span class="chat-av" id="chatAv"></span><span><b id="chatName">Ava · Haven Support</b><span id="chatStatus">Typically replies in a minute</span></span><button type="button" id="chatClose" aria-label="Close chat">×</button></div>
+  <div class="chat-log" id="chatLog"></div>
+  <form class="chat-form" id="chatForm"><input id="chatIn" autocomplete="off" placeholder="Type a message…" aria-label="Message"><button type="submit">Send</button></form>
+</section>
+<div id="exitM" role="dialog" aria-modal="true" aria-labelledby="exitH" hidden>
+  <div class="exit-card">
+    <button class="x" type="button" id="exitX" aria-label="Close">×</button>
+    <h3 id="exitH">Wait! Before you go…</h3>
+    <p id="exitP">Get your first month of Haven free. Tell us where to send your code.</p>
+    <form id="exitF"><input id="exitIn" type="email" placeholder="you@example.com" aria-label="Email address"><button class="btn btn-primary" type="submit">Claim offer</button></form>
+    <button class="btn" id="exitStay" type="button" hidden>I'll stay</button>
+  </div>
+</div>
 <div id="vignette" aria-hidden="true"></div>
 <canvas id="noise" aria-hidden="true"></canvas>
-<button id="snd" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9Z"/><path id="sndWave" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg><span id="sndLabel">Sound off · turn on for the full Haven experience</span></button>
+<button id="snd" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9Z"/><path id="sndWave" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg><span id="sndLabel">Sound off<span class="snd-long"> · turn on for the full Haven experience</span></span></button>
 <div id="scare" hidden><canvas id="scareCv" aria-hidden="true"></canvas><p id="scareMsg">Where would you go?</p></div>
 
 <script>
@@ -697,7 +833,7 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
   const rand = (a, b) => a + Math.random() * (b - a);
   const TAU = Math.PI * 2;
   const T0 = Date.now();
-  const st = { p: 0, max: 0, cur: 0, hes: 0, away: 0, ended: false, scaring: false, px: innerWidth / 2, py: innerHeight / 2, hasPtr: false };
+  const st = { p: 0, max: 0, cur: 0, hes: 0, away: 0, ended: false, scaring: false, px: innerWidth / 2, py: innerHeight / 2, hasPtr: false, touchAt: -1e9 };
   const A = { ctx: null, on: false, muted: false, master: null, drone: null, lp: null, spokeEye: false };
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -728,7 +864,7 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
     $('#fHes').textContent = st.hes + (st.away ? ` · looked away ${st.away}×` : '');
     $('#lnTime').textContent = `${e.m ? e.m + (e.m === 1 ? ' minute' : ' minutes') + ' and ' : ''}${e.s} seconds. You read every word. I like that.`;
     $('#lnClock').textContent = `It's ${fmtTime(now)}. ` + (isNight() ? 'Everyone else in your house is asleep.' : 'You think daylight makes you safe.');
-    $('#lnWhere').textContent = `You're on a ${os}, ${city ? 'somewhere near ' + city : 'not far from here'}.`;
+    $('#lnWhere').textContent = `You're on ${/^[AEIOU]/.test(os) ? 'an' : 'a'} ${os}, ${city ? 'somewhere near ' + city : 'not far from here'}.`;
   }
   tick(); setInterval(tick, 1000);
 
@@ -740,12 +876,19 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
   }
 
   /* ---------- scroll + stages ---------- */
-  let hesTimer;
+  let hesTimer, lastY = scrollY, lastYT = performance.now();
+  const coarse = matchMedia('(pointer: coarse)').matches, fine = matchMedia('(pointer: fine)').matches;
   function onScroll() {
     const max = root.scrollHeight - innerHeight;
     st.p = max > 0 ? clamp(scrollY / max, 0, 1) : 0;
     root.style.setProperty('--p', st.p.toFixed(4));
     audioUpdate();
+    const nowS = performance.now(), dtS = nowS - lastYT;
+    if (dtS > 400) { lastY = scrollY; lastYT = nowS; }
+    else if (dtS > 80) {
+      const v = (scrollY - lastY) / dtS; lastY = scrollY; lastYT = nowS;
+      if (v < -2.6 && coarse && st.exit) st.exit();
+    }
     clearTimeout(hesTimer);
     hesTimer = setTimeout(() => { if (st.p > 0.05 && !st.scaring) st.hes++; }, 2600);
   }
@@ -766,6 +909,7 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
     $$('[data-nav]').forEach(a => a.textContent = L[+a.dataset.nav]);
     $('#navCta').textContent = L[4];
     sndLabel();
+    if (st.onStage) st.onStage();
   }
   const stageIO = new IntersectionObserver(es => {
     es.forEach(e => {
@@ -784,7 +928,9 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
     else document.title = st.ended ? 'Welcome home.' : (st.max >= 3 ? 'You came back.' : baseTitle);
   });
 
-  addEventListener('pointermove', e => { st.px = e.clientX; st.py = e.clientY; st.hasPtr = e.pointerType === 'mouse'; }, { passive: true });
+  const ptr = e => { st.px = e.clientX; st.py = e.clientY; if (e.pointerType === 'mouse') st.hasPtr = true; else st.touchAt = performance.now(); };
+  addEventListener('pointermove', ptr, { passive: true });
+  addEventListener('pointerdown', ptr, { passive: true });
 
   /* ---------- text corruption ---------- */
   const corruptEls = $$('[data-corrupt]');
@@ -884,7 +1030,7 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
   }
   (function heart() {
     let delay = 900;
-    if (A.on && A.ctx && st.cur >= 4 && !st.scaring) { thump(0); thump(0.17); delay = lerp(950, 560, clamp((st.p - 0.8) / 0.2, 0, 1)); }
+    if (A.on && A.ctx && st.cur >= 4 && !st.scaring) { thump(0); thump(0.17); vibrate([35, 130, 35]); delay = lerp(950, 560, clamp((st.p - 0.8) / 0.2, 0, 1)); }
     setTimeout(heart, delay);
   })();
   function distCurve(k) {
@@ -926,8 +1072,8 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
     const l = $('#sndLabel'), btn = $('#snd');
     btn.setAttribute('aria-pressed', String(A.on));
     $('#sndWave').style.opacity = A.on ? 1 : 0.2;
-    if (A.on) l.textContent = st.max >= 4 ? 'Sound on · it hears you too' : 'Sound on';
-    else l.textContent = st.max >= 3 ? 'Sound off · it can still hear you' : 'Sound off · turn on for the full Haven experience';
+    const tail = A.on ? (st.max >= 4 ? ' · it hears you too' : '') : (st.max >= 3 ? ' · it can still hear you' : ' · turn on for the full Haven experience');
+    l.innerHTML = (A.on ? 'Sound on' : 'Sound off') + (tail ? `<span class="snd-long">${tail}</span>` : '');
   }
   function soundOn() {
     if (!ensureCtx()) { $('#sndLabel').textContent = 'Sound isn\'t available in this browser'; return false; }
@@ -975,6 +1121,7 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
     ctx.textBaseline = 'top'; ctx.textAlign = 'right'; ctx.fillText('REC', w - 16 * s, 14 * s); ctx.textAlign = 'left';
     if (Math.floor(t / 650) % 2 === 0) { ctx.fillStyle = '#E0262F'; ctx.beginPath(); ctx.arc(w - 16 * s - fs * 2.6, 14 * s + fs * 0.55, fs * 0.38, 0, TAU); ctx.fill(); }
   }
+  function stageW(w, h, focus) { const W = Math.max(w, h * 1.6); return [W, clamp(w / 2 - W * focus, w - W, 0)]; }
   function poly(ctx, pts, fill) { ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); }
 
   function figure(ctx, x, foot, H, o = {}) {
@@ -1003,7 +1150,8 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
 
   /* ---------- hallway camera ---------- */
   function drawHall(cv, t, fig) {
-    const ctx = cv.getContext('2d'), [w, h] = fit(cv, 1.5);
+    const ctx = cv.getContext('2d'), [cw, h] = fit(cv, 1.5), [w, ox] = stageW(cw, h, .5);
+    ctx.save(); ctx.translate(ox, 0);
     const vx = w / 2, bw = w * .24, bh = h * .46, bx = vx - bw / 2, by = h * .24;
     ctx.fillStyle = '#1D201F'; ctx.fillRect(0, 0, w, h);
     poly(ctx, [[0, 0], [w, 0], [bx + bw, by], [bx, by]], '#2A2E2C');
@@ -1028,13 +1176,16 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
     }
     if (Math.random() < .04) { ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillRect(0, 0, w, h); }
     ctx.fillStyle = 'rgba(70,110,80,.10)'; ctx.fillRect(0, 0, w, h);
-    grain(ctx, w, h, .13); scan(ctx, w, h); vig(ctx, w, h, .75);
-    hud(ctx, w, h, fig ? 'CAM 03 · HALLWAY · LIVE' : 'CAM 03 · HALLWAY', t);
+    ctx.restore();
+    grain(ctx, cw, h, .13); scan(ctx, cw, h); vig(ctx, cw, h, .75);
+    hud(ctx, cw, h, fig ? 'CAM 03 · HALLWAY · LIVE' : 'CAM 03 · HALLWAY', t);
   }
 
   /* ---------- "your room" camera ---------- */
   function drawRoom(cv, t, d) {
-    const ctx = cv.getContext('2d'), [w, h] = fit(cv, 1.5);
+    const ctx = cv.getContext('2d'), [cw, h] = fit(cv, 1.5), [w, ox] = stageW(cw, h, .6);
+    ctx.fillStyle = '#08090A'; ctx.fillRect(0, 0, cw, h);
+    ctx.save(); ctx.translate(ox, 0);
     ctx.fillStyle = '#08090A'; ctx.fillRect(0, 0, w, h);
     ctx.fillStyle = '#0D0F11'; ctx.fillRect(0, 0, w, h * .62);
     ctx.fillStyle = '#141A21'; ctx.fillRect(w * .07, h * .1, w * .17, h * .3);
@@ -1059,8 +1210,9 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
       figure(ctx, fx, foot, H, { fill: '#020203', face: d > .4 ? (d - .4) * .9 : .04, tilt: -.3 - d * .25, lean: -.06 - d * .12, reachL: d > .65 ? (d - .65) * w * .32 : 0, raiseL: d > .65 ? (d - .65) * h * .9 : 0 });
     }
     ctx.fillStyle = 'rgba(70,100,90,.08)'; ctx.fillRect(0, 0, w, h);
-    grain(ctx, w, h, .16); scan(ctx, w, h); vig(ctx, w, h, .8);
-    hud(ctx, w, h, 'CAM 00 · YOUR ROOM · LIVE', t);
+    ctx.restore();
+    grain(ctx, cw, h, .16); scan(ctx, cw, h); vig(ctx, cw, h, .8);
+    hud(ctx, cw, h, 'CAM 00 · YOUR ROOM · LIVE', t);
   }
 
   /* ---------- eye ---------- */
@@ -1072,10 +1224,10 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
   function drawEye(now) {
     const cv = eye.cv, ctx = cv.getContext('2d'), [w, h] = fit(cv);
     ctx.fillStyle = '#000'; ctx.fillRect(0, 0, w, h);
-    const cx = w / 2, cy = h / 2, ew = Math.min(w * .44, h * 1.0), eh = ew * .46;
+    const cx = w / 2, cy = h / 2, ew = Math.min(w * (w < h * 1.2 ? .48 : .44), h), eh = ew * .46;
     const r = cv.getBoundingClientRect();
     let tx, ty;
-    if (st.hasPtr) { tx = (st.px - (r.left + r.width / 2)) / (r.width / 2); ty = (st.py - (r.top + r.height / 2)) / (r.height / 2); }
+    if (st.hasPtr || now - st.touchAt < 2500) { tx = (st.px - (r.left + r.width / 2)) / (r.width / 2); ty = (st.py - (r.top + r.height / 2)) / (r.height / 2); }
     else { tx = Math.sin(now / 1700) * .6; ty = .35 + Math.cos(now / 2300) * .25; }
     tx = clamp(tx, -1, 1); ty = clamp(ty, -1, 1);
     eye.lx += (tx - eye.lx) * .12; eye.ly += (ty - eye.ly) * .12;
@@ -1131,9 +1283,14 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
     if (e.isIntersecting) { if (cam2Seen) hallD = Math.min(.92, hallD + .2); cam2Seen = true; }
   })).observe(cam2);
 
-  let lastCam = 0, lastNoise = 0, lastT = performance.now();
+  let lastCam = 0, lastNoise = 0, lastT = performance.now(), gx = innerWidth / 2, gy = innerHeight / 2;
+  const ghost = $('#ghost');
   function frame(now) {
     const dt = now - lastT; lastT = now;
+    if (fine && st.hasPtr && st.cur >= 4 && !st.scaring) {
+      gx += (innerWidth - st.px - gx) * .06; gy += (st.py - gy) * .06;
+      ghost.style.transform = `translate(${gx}px,${gy}px) scaleX(-1)`; ghost.classList.add('on');
+    } else ghost.classList.remove('on');
     if (!st.scaring) {
       logos();
       if (now - lastCam > 85) {
@@ -1219,11 +1376,14 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
     $('#announce').innerHTML = 'You can\'t leave. You already tried.<a href="#final">Try again</a>';
     $('#leaveBtn').textContent = 'Leave Haven again';
     document.title = 'Welcome home.';
+    setTimeout(() => haven('welcome home.', 0), 2500);
   }
 
   function jumpscare() {
     if (st.scaring) return;
     st.scaring = true; root.classList.add('scaring');
+    ['#chat', '#chatTease', '#cookie', '#exitM'].forEach(s => $(s).hidden = true);
+    vibrate([300, 80, 500]);
     if (!A.muted && ensureCtx()) { scream(); }
     showOverlay();
     const t0 = performance.now(), dur = reduce ? 1400 : 1150;
@@ -1254,6 +1414,199 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
       setTimeout(() => { scareEl.hidden = true; scareCv.style.opacity = 1; }, 140);
     }, 6000);
   })).observe($('#foot'));
+
+  function vibrate(p) { try { if (coarse && navigator.vibrate) navigator.vibrate(p); } catch (e) {} }
+  const HOUSE_SVG = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 15 16 5l12 10v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z" fill="#13866F"/><circle cx="16" cy="18" r="5.4" fill="#fff"/><circle cx="16" cy="18" r="2.4" fill="#13201E"/></svg>';
+  const EYE_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12Z" fill="#E8DFD0"/><circle cx="12" cy="12" r="3.6" fill="#6B3A12"/><circle cx="12" cy="12" r="1.7" fill="#000"/></svg>';
+
+  /* ---------- cookie banner ---------- */
+  const ck = $('#cookie');
+  const isDarkCk = () => ck.classList.contains('dark');
+  if (!store.get('haven-ck')) setTimeout(() => { if (st.max < 2 && !st.scaring) ck.hidden = false; }, 1400);
+  $('#ckAccept').addEventListener('click', () => { if (!isDarkCk()) store.set('haven-ck', '1'); ck.hidden = true; });
+  $('#ckDecline').addEventListener('click', () => {
+    if (isDarkCk()) { ck.hidden = true; return; }
+    $('#cookieText').textContent = 'Declining isn\'t available in your region. Haven needs to remember you.';
+    $('#ckDecline').hidden = true;
+  });
+  function cookieRelapse() {
+    ck.classList.add('dark');
+    $('#cookieText').textContent = 'We use cookies to remember you. We will always remember you.';
+    $('#ckAccept').textContent = 'Accept';
+    const d = $('#ckDecline'); d.hidden = false; d.textContent = 'Accept'; d.className = 'btn';
+    ck.hidden = false;
+    setTimeout(() => { if (isDarkCk()) ck.hidden = true; }, 9000);
+  }
+
+  /* ---------- social proof toasts ---------- */
+  const toastQ = [
+    { s: 0, t: 'Dana from Portland just started a free trial', m: '2 minutes ago' },
+    { s: 1, t: 'Marcus from Leeds upgraded to Family', m: '6 minutes ago' },
+    { s: 1, t: 'The Okafor family renewed for another year', m: 'They didn\'t have a choice' },
+    { s: 2, t: () => `Someone ${city ? 'near ' + city : 'nearby'} is reading this page`, m: 'Right now' },
+    { s: 2, t: 'Dana from Portland is still inside', m: 'Day 214' },
+    { s: 3, t: 'Someone in your house just opened a door', m: 'Just now', dark: true },
+    { s: 3, t: 'Someone in your house is coming up the stairs', m: 'Just now', dark: true },
+    { s: 4, t: 'Someone is standing behind you', m: 'Don\'t turn around', dark: true }
+  ];
+  let toastI = 0, lastToast = performance.now() - 3000;
+  setInterval(() => {
+    if (st.scaring || toastI >= toastQ.length || !ck.hidden) return;
+    const q = toastQ[toastI];
+    if (q.s > st.cur || performance.now() - lastToast < 11000) return;
+    lastToast = performance.now(); toastI++;
+    const el = document.createElement('div'); el.className = 'toast' + (q.dark ? ' dark' : '');
+    const av = document.createElement('span'); av.className = 'tav'; av.innerHTML = q.dark ? EYE_SVG : HOUSE_SVG;
+    const tx = document.createElement('span'); tx.textContent = typeof q.t === 'function' ? q.t() : q.t;
+    const sm = document.createElement('small'); sm.textContent = q.m; tx.appendChild(sm);
+    el.append(av, tx); $('#toasts').appendChild(el);
+    if (q.s >= 4 && A.on) speak('behind you', true);
+    setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 5200);
+  }, 1500);
+
+  /* ---------- support chat ---------- */
+  const chatEl = $('#chat'), chatLog = $('#chatLog'), tease = $('#chatTease'), badge = $('#chatBadge');
+  let unread = 0, teaseTimer;
+  $('#chatAv').innerHTML = HOUSE_SVG;
+  function addMsg(text, who) {
+    const m = document.createElement('div'); m.className = 'msg ' + who; m.textContent = text;
+    chatLog.appendChild(m); chatLog.scrollTop = chatLog.scrollHeight; return m;
+  }
+  const chatQ = []; let chatBusy = false;
+  function haven(text, delay = 900, stage = -1) { chatQ.push({ text, delay, stage }); pumpChat(); }
+  function pumpChat() {
+    if (chatBusy || !chatQ.length) return;
+    chatBusy = true;
+    const it = chatQ.shift();
+    setTimeout(() => {
+      if (it.stage >= 0 && it.stage < st.max - 1) { chatBusy = false; pumpChat(); return; }
+      const t = addMsg('•••', 'them typing');
+      setTimeout(() => {
+        t.remove(); addMsg(it.text, 'them');
+        if (chatEl.hidden && !st.scaring) {
+          unread++; badge.textContent = unread; badge.hidden = false;
+          tease.textContent = it.text; tease.hidden = false;
+          clearTimeout(teaseTimer); teaseTimer = setTimeout(() => tease.hidden = true, 7000);
+        }
+        chatBusy = false; pumpChat();
+      }, 700 + it.text.length * 28);
+    }, it.delay);
+  }
+  function openChat() {
+    chatEl.hidden = false; tease.hidden = true; unread = 0; badge.hidden = true;
+    chatLog.scrollTop = chatLog.scrollHeight;
+    if (!coarse) $('#chatIn').focus();
+  }
+  $('#chatBtn').addEventListener('click', () => chatEl.hidden ? openChat() : (chatEl.hidden = true));
+  tease.addEventListener('click', openChat);
+  $('#chatClose').addEventListener('click', () => chatEl.hidden = true);
+  const replies = [
+    ['Great question! Haven works in homes of every size, and setup takes one evening. Want me to start your free trial?', 'Our Family plan is the most popular. It covers presence and sleep tracking for everyone in the house.', 'Happy to help! Most families are up and running before bedtime.'],
+    ['Great question! Haven works in homes of every size, and setup takes one evening. Want me to start your free trial?', 'Absolutely. Haven learns every voice in the house within a week. Even the quiet ones.', 'I can help with that! Is there anyone else in the house who should be on the plan?'],
+    ['I can answer that. First, who else is in the room with you?', 'Sorry, I didn\'t catch that. Could you say it out loud instead? Haven can hear you.', 'Ava is busy right now. I can help.'],
+    ['ava isn\'t here anymore.', 'i heard you the first time.', 'you type the way you breathe. quickly.'],
+    ['stop typing. listen.', 'i\'m not in the chat.', 'turn around.']
+  ];
+  let replyI = 0;
+  $('#chatForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const inp = $('#chatIn'), text = inp.value.trim(); if (!text) return;
+    inp.value = ''; addMsg(text, 'me');
+    const set = replies[st.max];
+    let r = set[replyI++ % set.length];
+    if (st.max >= 3 && Math.random() < .35) r = `"${text.toLowerCase().slice(0, 80)}." that's what the last family said too.`;
+    haven(r, 700);
+  });
+  function chatDark() {
+    chatEl.classList.add('dark'); tease.classList.add('dark');
+    $('#chatName').textContent = 'Haven'; $('#chatStatus').textContent = 'Always here';
+    $('#chatAv').innerHTML = EYE_SVG; $('#chatIn').placeholder = 'Say something…';
+  }
+  const stageMsgs = {
+    0: [['Hi there! I\'m Ava from Haven. Can I help you find the right plan for your family?', 9000]],
+    2: [[`Still there? Ava again. Quick question before you go on.`, 1500], ['Are you alone right now?', 4200]],
+    3: [['ava had to go.', 1500], ['scroll back up and read the features again. slowly.', 4500]],
+    4: [['look up from your screen.', 2500], ['not at me. behind you.', 9000]]
+  };
+  const msgDone = new Set();
+
+  /* ---------- exit intent ---------- */
+  const exitM = $('#exitM'), exitShown = { light: false, dark: false };
+  function closeExit() { exitM.hidden = true; }
+  st.exit = () => {
+    if (st.scaring || !exitM.hidden) return;
+    const dark = st.max >= 3, key = dark ? 'dark' : 'light';
+    if (exitShown[key] || (!dark && st.p < .06)) return;
+    exitShown[key] = true;
+    exitM.classList.toggle('dark', dark);
+    if (dark) {
+      $('#exitH').textContent = 'You can\'t leave.';
+      $('#exitP').textContent = 'Haven has locked this page for your safety. Stay a little longer.';
+      $('#exitF').hidden = true; $('#exitStay').hidden = false;
+      if (A.on) speak('Where are you going?', true);
+    }
+    exitM.hidden = false;
+  };
+  document.addEventListener('mouseout', e => { if (!e.relatedTarget && e.clientY <= 4) st.exit(); });
+  $('#exitX').addEventListener('click', closeExit);
+  $('#exitStay').addEventListener('click', () => { $('#exitStay').textContent = 'Good.'; setTimeout(closeExit, 700); });
+  exitM.addEventListener('click', e => { if (e.target === exitM && !exitM.classList.contains('dark')) closeExit(); });
+  $('#exitF').addEventListener('submit', e => {
+    e.preventDefault(); $('#exitIn').value = '';
+    $('#exitF').hidden = true;
+    $('#exitH').textContent = 'No need.';
+    $('#exitP').textContent = 'Haven doesn\'t need your email. It already knows where you live.';
+    setTimeout(closeExit, 3200);
+  });
+  addEventListener('keydown', e => { if (e.key === 'Escape') { if (!exitM.hidden && !exitM.classList.contains('dark')) closeExit(); chatEl.hidden = true; } });
+
+  /* ---------- handprints on the glass ---------- */
+  const HAND = '<svg viewBox="0 0 150 190"><g filter="url(#smudge)" fill="#D8D4CC"><ellipse cx="76" cy="130" rx="40" ry="44"/><rect x="34" y="44" width="17" height="66" rx="8.5" transform="rotate(-12 42 104)"/><rect x="55" y="20" width="18" height="84" rx="9"/><rect x="78" y="16" width="18" height="88" rx="9" transform="rotate(4 87 104)"/><rect x="100" y="36" width="16" height="72" rx="8" transform="rotate(14 108 108)"/><rect x="6" y="108" width="46" height="17" rx="8.5" transform="rotate(-38 44 120)"/><rect x="72" y="168" width="3" height="20" rx="1.5"/><rect x="58" y="166" width="2" height="12" rx="1"/></g></svg>';
+  function slap() {
+    if (!A.on || !A.ctx) return;
+    const c = A.ctx, n = c.currentTime, s = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
+    s.buffer = noiseBuffer(); f.type = 'lowpass'; f.frequency.value = 900;
+    g.gain.setValueAtTime(.7, n); g.gain.exponentialRampToValueAtTime(.001, n + .18);
+    s.connect(f); f.connect(g); g.connect(A.master); s.start(n, Math.random()); s.stop(n + .2); thump(0);
+  }
+  function spawnHand(x, y) {
+    if (reduce) return;
+    const d = document.createElement('div'); d.className = 'hand'; d.innerHTML = HAND;
+    d.style.left = x + 'px'; d.style.top = y + 'px';
+    d.style.transform = `rotate(${rand(-25, 25)}deg) scale(${rand(.85, 1.15)}) scaleX(${Math.random() < .5 ? -1 : 1})`;
+    $('#hands').appendChild(d);
+    requestAnimationFrame(() => requestAnimationFrame(() => d.classList.add('on')));
+    setTimeout(() => d.classList.add('fade'), 2400);
+    setTimeout(() => d.remove(), 6200);
+    slap(); vibrate(40);
+  }
+  addEventListener('pointerdown', e => {
+    if (st.cur < 3 || st.scaring || e.target.closest('button, a, input, #chat, #cookie, #exitM')) return;
+    spawnHand(e.clientX, e.clientY);
+  });
+  (function haunt() {
+    if (st.cur >= 4 && !st.scaring && document.visibilityState === 'visible') {
+      const x = rand(.15, .85) * innerWidth, y = rand(.2, .8) * innerHeight;
+      spawnHand(x, y);
+      if (Math.random() < .5) setTimeout(() => spawnHand(x + rand(110, 170) * (x > innerWidth / 2 ? -1 : 1), y + rand(-40, 40)), 380);
+    }
+    setTimeout(haunt, rand(9000, 16000));
+  })();
+
+  /* ---------- stage changes for the widgets ---------- */
+  st.onStage = () => {
+    if (st.max >= 3) $('#statMoved').textContent = 'families have ever been found';
+    if (st.max >= 2 && !ck.hidden && !isDarkCk()) ck.hidden = true;
+    if (st.max >= 3 && !isDarkCk() && !st.scaring) cookieRelapse();
+    if (st.max >= 3) chatDark();
+    for (let s = 0; s <= st.max; s++) {
+      if (msgDone.has(s) || !stageMsgs[s]) continue;
+      msgDone.add(s);
+      if (s < st.max && s !== 0) continue;
+      stageMsgs[s].forEach(([t, d]) => haven(t, d, s));
+    }
+  };
+  st.onStage();
 })();
 </script>
 </body>
