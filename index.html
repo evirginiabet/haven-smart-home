@@ -698,6 +698,7 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
   const TAU = Math.PI * 2;
   const T0 = Date.now();
   const st = { p: 0, max: 0, cur: 0, hes: 0, away: 0, ended: false, scaring: false, px: innerWidth / 2, py: innerHeight / 2, hasPtr: false };
+  const A = { ctx: null, on: false, muted: false, master: null, drone: null, lp: null, spokeEye: false };
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
@@ -829,7 +830,6 @@ html[data-stage="3"] #snd, html[data-stage="4"] #snd { background: rgba(20,20,20
   $$('.stay').forEach(b => b.addEventListener('click', () => { b.textContent = 'Good.'; }));
 
   /* ---------- audio ---------- */
-  const A = { ctx: null, on: false, muted: false, master: null, drone: null, lp: null, spokeEye: false };
   function ensureCtx() {
     const C = window.AudioContext || window.webkitAudioContext;
     if (!C) return null;
